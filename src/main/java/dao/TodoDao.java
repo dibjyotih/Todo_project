@@ -1,4 +1,3 @@
-
 package dao;
 
 import java.sql.*;
@@ -49,15 +48,17 @@ public class TodoDao {
         }
     }
     
-    public void updateTodo(int id) throws SQLException {
-        String sql = "Update todos set status='Completed' WHERE id=?";
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
+    public void updateTodo(int id,String title, String description, String lastDate, String status) throws SQLException {
+      String sql = "UPDATE todos SET title = ?, description = ?, last_date = ?, status = ? WHERE id = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, title);
+            pstmt.setString(2, description);
+            pstmt.setString(3, lastDate);
+            pstmt.setString(4, status);
+            pstmt.setInt(5, id);
+            pstmt.executeUpdate();
         }
-    }
-}
-
+    }}
 /*package dao;
 import java.sql.*;
 import java.util.*;
