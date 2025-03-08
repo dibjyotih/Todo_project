@@ -21,9 +21,10 @@
             }
         }
 
-        function showUpdateForm(id, title, description, last_date, status) {
+        function showUpdateForm(id,rollno, title, description, last_date, status) {
             document.getElementById("updateForm").style.display = "block";
             document.getElementById("updateId").value = id;
+            document.getElementById("updaterollno").value = rollno;      
             document.getElementById("updateTitle").value = title;
             document.getElementById("updateDescription").value = description;
             document.getElementById("updateLastDate").value = last_date;
@@ -41,7 +42,8 @@
         
         <!-- Add Task Form -->
         <form action="add" method="post" onsubmit="return validateForm()">
-            <input type="text" name="title" placeholder="Title" required>
+            <input type="text" name="rollno" placeholder= "Roll No" required>
+            <input type="text" name="title" placeholder="Title" required>           
             <input type="text" id="description" name="description" placeholder="Description">
             <input type="date" id="last_date" name="last_date" placeholder="Last Date" required>
             <button type="submit" class="btn btn-primary">Add</button>
@@ -51,6 +53,7 @@
     <h3>Update Task</h3>
     <form action="update" method="post">
         <input type="hidden" id="updateId" name="id">
+        <input type="text" id="updateRollno" name="rollno" placeholder="Roll No" required>
         <input type="text" id="updateTitle" name="title" placeholder="Title" required>
         <input type="text" id="updateDescription" name="description" placeholder="Description" required>
         <input type="date" id="updateLastDate" name="last_date" placeholder="Last Date" required>
@@ -65,6 +68,7 @@
         <!-- Task List Table -->
         <table class="table mt-3">
             <tr>
+            	<th>Roll No</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Last Date</th>
@@ -77,6 +81,7 @@
                     for (Todo todo : todos) {
             %>
             <tr>
+                <td><%= todo.getRollno() %></td>
                 <td><%= todo.getTitle() %></td>
                 <td><%= todo.getDescription() %></td>
                 <td><%= todo.getLast_date() %></td>
@@ -85,7 +90,7 @@
                     <a href="javascript:void(0);" onclick="confirmDelete(<%= todo.getId() %>)" class="btn btn-danger">Delete</a>
                 </td>
                 <td>
-                    <a href="javascript:void(0);" onclick="showUpdateForm(<%= todo.getId() %>, '<%= todo.getTitle() %>', '<%= todo.getDescription() %>', '<%= todo.getLast_date() %>', '<%= todo.getStatus() %>')" class="btn btn-warning">Update</a>
+                    <a href="javascript:void(0);" onclick="showUpdateForm(<%= todo.getId() %>, '<%= todo.getRollno() %>', '<%= todo.getTitle() %>', '<%= todo.getDescription() %>', '<%= todo.getLast_date() %>', '<%= todo.getStatus() %>')" class="btn btn-warning">Update</a>
                 </td>
             </tr>
             <% }
